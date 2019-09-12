@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"></meta>
     <title>Super Mario</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="module" src="./src/index.js"></script>
   </head>
   <body>
-    <h1>Super Mario</h1>
-    <div><input id="startbutton" type="button" value="start..."><input id="stopbutton" type="button" value="stop!"></div>
-    
-    <canvas id="screen" width="640" height="800"></canvas>
-    
-  </body>
+    <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Super Mario</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <input class="btn btn-primary" id="startbutton" type="button" value="start..." />
+      </div>
+      <div class="col-xs-2">
+        <input class="btn btn-secondary" id="stopbutton" type="button" value="stop!" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <canvas style="border:1px solid blue" id="screen" width="800" height="600"></canvas>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
