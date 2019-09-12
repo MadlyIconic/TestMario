@@ -9,6 +9,14 @@ export class Matrix {
     this.grid = [];
   }
 
+  forEach(callBack) {
+    this.grid.forEach((column, x) => {
+      column.forEach((value, y) => {
+        callBack(value, x, y);
+        //sprites.drawTile(tile.name, bgContext, x, y);
+      });
+    });
+  }
   set(x, y, value) {
     if (!this.grid[x]) {
       this.grid[x] = [];

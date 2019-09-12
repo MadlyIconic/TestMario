@@ -14,10 +14,8 @@ export function createBackgroundLayer(level, sprites) {
   buffer.height = 768;
   const bgContext = buffer.getContext("2d");
 
-  level.tiles.grid.forEach((column, x) => {
-    column.forEach((tile, y) => {
-      sprites.drawTile(tile.name, bgContext, x, y);
-    });
+  level.tiles.forEach((tile, x, y) => {
+    sprites.drawTile(tile.name, bgContext, x, y);
   });
 
   return function drawBackgroundLayer(context) {

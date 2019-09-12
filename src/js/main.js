@@ -35,6 +35,7 @@ export default class main {
       const timer = new Timer(1 / 60);
       timer.update = function update(deltaTime) {
         //console.log("level: ", level);
+        
         level.update(deltaTime);
         level.comp.draw(context);
         mario.vel.y += gravity * deltaTime;
