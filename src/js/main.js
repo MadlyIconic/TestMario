@@ -2,8 +2,9 @@ import { loadLevel } from "./loaders.js";
 import vector from "./vector.js";
 import { createMario } from "./helpers.js";
 import Timer from "./timer.js";
-import Keyboard from "./keyboardstate.js";
+
 import {createCollisionLayer} from "./layers.js"
+import { setUpKeyboard } from "./input.js";
 
 export default class main {
   constructor(context, canvas) {
@@ -24,25 +25,25 @@ export default class main {
       let gravity = 2000;
       let context = this.context;
 
-      const SPACE = 32;
-      const input = new Keyboard();
-      input.addMapping(SPACE, keyState => {
-        if (keyState) {
-          mario.jump.start(mario);
-        } else {
-          mario.jump.cancel();
-        }
-      });
+      const input = setUpKeyboard(mario);
 
-      input.addMapping(39, keyState => {
-        console.log('39 keypress:', keyState);
-        mario.go.dir = keyState;
-      });
+      // const SPACE = 32;
+      // const input = new Keyboard();
+      // input.addMapping(SPACE, keyState => {
+      //   if (keyState) {
+      //     mario.jump.start(mario);
+      //   } else {
+      //     mario.jump.cancel();
+      //   }
+      // });
 
-      input.addMapping(37, keyState => {
-        console.log('37 keypress:', keyState);
-        mario.go.dir = -keyState;
-      });
+      // input.addMapping(39, keyState => {
+      //   mario.go.dir = keyState;
+      // });
+
+      // input.addMapping(37, keyState => {
+      //   mario.go.dir = -keyState;
+      // });
 
       input.listenTo(window);
 

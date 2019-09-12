@@ -7,12 +7,12 @@ import Go from "./traits/go.js";
 export function createMario(x, y, velx, vely) {
   return loadMarioSprite().then(sprite => {
     const mario = new Entity();
-    mario.size.set(14, 48);
+    mario.size.set(96, 96);
     mario.pos.set(x, y);
     //mario.vel.set(velx, vely);
     mario.addTrait(new Go());
     mario.addTrait(new Jump());
-    mario.addTrait(new Velocity());
+    // mario.addTrait(new Velocity());
 
     mario.draw = function drawMario(context) {
       sprite.draw("idle", context, this.pos.x, this.pos.y);
