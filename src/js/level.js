@@ -8,12 +8,14 @@ export default class Level {
     this.entities = new Set();
     this.tiles = new Matrix();
 
-    this.tileCollider = new TileCollider();
+    this.tileCollider = new TileCollider(this.tiles);
   }
 
   update(deltaTime) {
+    
     this.entities.forEach(entity => {
       entity.update(deltaTime);
+      this.tileCollider.test(entity);
     });
   }
 }
