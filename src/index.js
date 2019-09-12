@@ -1,4 +1,3 @@
-
 import Main from "./js/main.js";
 window.ref = null;
 let main = null;
@@ -12,7 +11,7 @@ $().ready(function() {
   $("#stopbutton").on("click", cancel);
 
   main = new Main(context);
-  console.log("ready!");
+  console.log("im ready!");
   //main.loadAll();
 });
 
