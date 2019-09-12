@@ -1,5 +1,5 @@
-import $ from "jquery";
-import Main from "./js/main";
+
+import Main from "./js/main.js";
 window.ref = null;
 let main = null;
 $().ready(function() {

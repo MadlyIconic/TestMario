@@ -1,6 +1,6 @@
-import Level from "./level";
-import { createBackgroundLayer, createSpriteLayer } from "./layers";
-import { loadbackgroundSprites } from "./sprites";
+import Level from "./level.js";
+import { createBackgroundLayer, createSpriteLayer } from "./layers.js";
+import { loadbackgroundSprites } from "./sprites.js";
 
 export function loadImage(url) {
   return new Promise(resolve => {

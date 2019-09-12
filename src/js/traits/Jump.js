@@ -1,4 +1,4 @@
-import Trait from "../trait";
+import Trait from "../trait.js";
 
 export default class Jump extends Trait {
   constructor() {

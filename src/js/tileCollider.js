@@ -1,4 +1,4 @@
-import TileResolver from "./tileResolver";
+import TileResolver from "./tileResolver.js";
 
 export default class TileCollider {
   constructor(tileMatrx) {

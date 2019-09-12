@@ -1,5 +1,5 @@
-import { loadImage } from "./loaders";
-import SpriteSheet from "./spritesheet";
+import { loadImage } from "./loaders.js";
+import SpriteSheet from "./spritesheet.js";
 
 export function loadMarioSprite() {
   return loadImage("./img/characters.gif").then(image => {

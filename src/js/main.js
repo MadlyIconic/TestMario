@@ -1,8 +1,8 @@
-import { loadLevel } from "./loaders";
-import vector from "./vector";
-import { createMario } from "./helpers";
-import Timer from "./timer";
-import Keyboard from "./keyboardstate";
+import { loadLevel } from "./loaders.js";
+import vector from "./vector.js";
+import { createMario } from "./helpers.js";
+import Timer from "./timer.js";
+import Keyboard from "./keyboardstate.js";
 
 export default class main {
   constructor(context) {
