@@ -11,8 +11,6 @@ $().ready(function() {
   $("#stopbutton").on("click", cancel);
 
   main = new Main(context, canvases.get(0));
-  console.log("ready!");
-  main = new Main(context);
   console.log("im ready!");
   //main.loadAll();
 });

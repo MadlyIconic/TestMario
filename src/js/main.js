@@ -33,6 +33,17 @@ export default class main {
           mario.jump.cancel();
         }
       });
+
+      input.addMapping(39, keyState => {
+        console.log('39 keypress:', keyState);
+        mario.go.dir = keyState;
+      });
+
+      input.addMapping(37, keyState => {
+        console.log('37 keypress:', keyState);
+        mario.go.dir = -keyState;
+      });
+
       input.listenTo(window);
 
       ['mmousedown', 'mousemove'].forEach(eventName => {
