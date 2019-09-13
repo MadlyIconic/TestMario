@@ -1,6 +1,6 @@
 import Level from "./level.js";
 import { createBackgroundLayer, createSpriteLayer } from "./layers.js";
-import { loadbackgroundSprites } from "./sprites.js";
+import SpriteSheet from "./spritesheet.js";
 
 export function loadImage(url) {
   return new Promise(resolve => {
@@ -12,15 +12,37 @@ export function loadImage(url) {
   });
 }
 
-function createTiles(level, backgrounds) {
+export function loadLevel(name) {
+  let levelname = `levels/${name}.json`;
+  return loadJSON (levelname)
+    .then(levelSpec => Promise.all([
+      levelSpec,
+      loadSpriteSheet(levelSpec.spriteSheet)
+    ]))
+    .then(([levelSpec, backgroundSprites]) => {
+    const level = new Level();
+    createTiles(level, levelSpec.backgrounds);
+    const backgroundLayer = createBackgroundLayer(level, backgroundSprites);
+    level.comp.layers.push(backgroundLayer);
+    const spriteLayer = createSpriteLayer(level.entities);
+    level.comp.layers.push(spriteLayer);
+    return level;
+  });
+}
 
+function loadJSON(levelname){
+  return fetch(levelname).then(r => r.json())
+}
+
+function createTiles(level, backgrounds) {
   function applyRange(background, xstart, xlength, ystart, ylength){
     const xend = xstart + xlength;
     const yend = ystart + ylength;
     for (let x = xstart; x < xend; ++x) {
       for (let y = ystart; y < yend; ++y) {
         level.tiles.set(x, y, {
-          name: background.tile
+          name: background.tile,
+          type: background.type
         });
       }
     }
@@ -42,25 +64,28 @@ function createTiles(level, backgrounds) {
   });
 }
 
-export function loadLevel(name) {
-  let levelname = `levels/${name}.json`;
-  return Promise.all([
-    loadJSON(levelname),
-    loadbackgroundSprites()
-  ]).then(([levelSpec, backgroundSprites]) => {
-    const level = new Level();
-    createTiles(level, levelSpec.backgrounds);
-    //console.log("levelSpec:", levelSpec);
-    //console.log("Sprites:", backgroundSprites);
-    const backgroundLayer = createBackgroundLayer(level, backgroundSprites);
-    level.comp.layers.push(backgroundLayer);
-    const spriteLayer = createSpriteLayer(level.entities);
-    level.comp.layers.push(spriteLayer);
-    //console.table(level.tiles.grid);
-    return level;
-  });
-}
 
-function loadJSON(levelname){
-  return fetch(levelname).then(r => r.json())
+function loadSpriteSheet(name){
+  return  loadJSON(`sprites/${name}.json`)
+  .then(sheetSpec => Promise.all(
+    [sheetSpec,loadImage(sheetSpec.imageURL)]))
+  .then(([sheetSpec, image])  => {
+    
+      const sprites = new SpriteSheet(
+        image,
+        sheetSpec.tileW,
+        sheetSpec.tileH);
+
+      sheetSpec.tiles.forEach(tileSpec =>{
+        sprites.defineTile(
+          tileSpec.name, 
+          tileSpec.index[0], 
+          tileSpec.index[1]);
+      })
+      // sprites.defineTile("ground", 0, 0);
+      // sprites.defineTile("sky", 3, 23);
+      //console.log("6");
+      return sprites;
+    
+  });
 }

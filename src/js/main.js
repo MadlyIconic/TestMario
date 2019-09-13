@@ -21,7 +21,6 @@ export default class main {
       loadLevel("1-1"),
       createMario(this.pos.x, this.pos.y, this.velocity.x, this.velocity.y)
     ]).then(([level, mario]) => {
-      //console.log("level: ", level, " mario:", mario);
       const camera = new Camera();
       window.camera = camera;
 
@@ -35,20 +34,9 @@ export default class main {
       input.listenTo(window);
 
       setUpMouseControl(this.canvas, mario, camera);
-      // ['mmousedown', 'mousemove'].forEach(eventName => {
-      //   this.canvas.addEventListener(eventName, event => {
-      //     if(event.buttons === 1){
-      //       mario.vel.set(0,0);
-      //       mario.pos.set(event.offsetX + camera.pos.x
-      //                    ,event.offsetY + camera.pos.y);
-      //     }
-      //   })
-      // })
-
+      
       const timer = new Timer(1 / 60);
-      timer.update = function update(deltaTime) {
-        //console.log("level: ", level);
-        
+      timer.update = function update(deltaTime) {  
         level.update(deltaTime);
         level.comp.draw(context, camera);
         mario.vel.y += gravity * deltaTime;
