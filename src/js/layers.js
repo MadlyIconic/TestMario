@@ -1,25 +1,44 @@
-// function drawBackground(background, context, sprites) {
-//   background.ranges.forEach(([x1, x2, y1, y2]) => {
-//     for (let x = x1; x < x2; ++x) {
-//       for (let y = y1; y < y2; ++y) {
-//         sprites.drawTile(background.tile, context, x, y);
-//       }
-//     }
-//   });
-// }
-
 export function createBackgroundLayer(level, sprites) {
   const buffer = document.createElement("canvas");
-  buffer.width = 2048;
+  buffer.width = 528 + 16;
   buffer.height = 768;
   const bgContext = buffer.getContext("2d");
 
-  level.tiles.forEach((tile, x, y) => {
-    sprites.drawTile(tile.name, bgContext, x, y);
-  });
+  let startIndex;
+  let endIndex;
+
+  const tiles = level.tiles;
+  const resolver = level.tileCollider.tiles;
+
+  function redraw(drawFrom, drawTo){
+    if(drawFrom == startIndex && drawTo == endIndex){
+      return;
+    }
+    startIndex = drawFrom;
+    endIndex = drawTo;
+
+    console.log("redrawing");
+
+    for (let x = startIndex; x <= endIndex; ++x) {
+      const col = tiles.grid[x];
+      if(col){
+        col.forEach((tile, y) => {
+          sprites.drawTile(tile.name, bgContext, x - startIndex, y);
+        });
+      }
+    }
+  }
 
   return function drawBackgroundLayer(context, camera) {
-    context.drawImage(buffer, -camera.pos.x, -camera.pos.y);
+    const drawWidth = resolver.toIndex(camera.size.x);
+    const drawFrom =  resolver.toIndex(camera.pos.x);
+    const drawTo  = drawFrom + drawWidth;
+    redraw(drawFrom, drawTo);
+
+    //console.log(-camera.pos.x, -camera.pos.x %16);
+    context.drawImage(buffer, 
+      -camera.pos.x % 16, 
+      -camera.pos.y);
   };
 }
 
@@ -48,14 +67,12 @@ export function createCollisionLayer(level){
   const getByIndexOriginal = tileResolver.getByIndex;
   tileResolver.getByIndex = function getByIndexFake(x, y){
     resolvedTiles.push({x,y});
-    //console.log('fakeGetByIndex', x,y);
     return getByIndexOriginal.call(tileResolver, x, y);
   }
 
   return function drawCollision(context, camera){
     context.strokeStyle = "blue";
     resolvedTiles.forEach(({x,y}) => {
-      //console.log("Would draw: ", x,y);
       context.beginPath();
       context.rect(x* tileSize - camera.pos.x, y* tileSize - camera.pos.y, tileSize,tileSize);
       context.stroke();
@@ -69,5 +86,13 @@ export function createCollisionLayer(level){
 
     resolvedTiles.length = 0;
   }
+}
 
+export function createCameraLayer(cameraToDraw){
+  return function drawCameraRect(context, fromCamera){
+    context.strokeStyle = 'purple';
+    context.beginPath();
+    context.rect(cameraToDraw.pos.x - fromCamera.pos.x, cameraToDraw.pos.y - fromCamera.pos.y, cameraToDraw.size.x, cameraToDraw.size.y);
+    context.stroke();
+  }
 }

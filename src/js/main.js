@@ -3,7 +3,7 @@ import vector from "./vector.js";
 import { createMario } from "./helpers.js";
 import Timer from "./timer.js";
 
-import {createCollisionLayer} from "./layers.js"
+import {createCollisionLayer,  createCameraLayer} from "./layers.js"
 import { setUpKeyboard } from "./input.js";
 import Camera from "./camera.js";
 import { setUpMouseControl } from "./debug.js";
@@ -24,7 +24,10 @@ export default class main {
       const camera = new Camera();
       window.camera = camera;
 
-      level.comp.layers.push(createCollisionLayer(level));
+      level.comp.layers.push(
+        createCollisionLayer(level),
+        createCameraLayer(camera)
+      );
       level.entities.add(mario);
       let gravity = 1000;
       let context = this.context;
