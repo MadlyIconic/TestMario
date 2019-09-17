@@ -11,19 +11,21 @@ export function createBackgroundLayer(level, sprites) {
   const resolver = level.tileCollider.tiles;
 
   function redraw(drawFrom, drawTo){
-    if(drawFrom == startIndex && drawTo == endIndex){
-      return;
-    }
+    // if(drawFrom == startIndex && drawTo == endIndex){
+    //   return;
+    // }
     startIndex = drawFrom;
     endIndex = drawTo;
-
-    console.log("redrawing");
 
     for (let x = startIndex; x <= endIndex; ++x) {
       const col = tiles.grid[x];
       if(col){
         col.forEach((tile, y) => {
-          sprites.drawTile(tile.name, bgContext, x - startIndex, y);
+          if(sprites.animations.has(tile.name)){
+            sprites.drawAnim(tile.name, bgContext, x - startIndex, y, level.totalTime);
+          }else{
+            sprites.drawTile(tile.name, bgContext, x - startIndex, y);
+          }
         });
       }
     }

@@ -5,6 +5,9 @@ export default class Timer {
 
     this.updateProxy = (time) => {
       accumulatedTime += (time - lastTime) / 1000;
+      if(accumulatedTime > 1){
+        accumulatedTime = 1;
+      }
       while (accumulatedTime > deltaTime) {
         this.update(deltaTime);
         accumulatedTime -= deltaTime;
@@ -16,11 +19,9 @@ export default class Timer {
   }
 
   enqueue() {
-    //console.log("this.updateProxy: ", this.updateProxy);
     window.ref = window.requestAnimationFrame(this.updateProxy);
   }
   start() {
-    //console.log("timer start");
     this.enqueue();
   }
 }

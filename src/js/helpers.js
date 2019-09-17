@@ -2,7 +2,7 @@ import Entity from "./entity.js";
 import { loadSpriteSheet } from "./loaders.js";
 import Jump from "./traits/Jump.js";
 import Go from "./traits/go.js";
-import { createAnmation, routeFrame } from "./anim.js";
+import { createAnimation, routeFrame } from "./anim.js";
 
 export function createMario(x, y, velx, vely) {
   return loadSpriteSheet('mario').then(sprite => {
@@ -18,7 +18,7 @@ export function createMario(x, y, velx, vely) {
       frames.push(entry[0])
     };
 
-    const runAnim = createAnmation(frames, 10);
+    const runAnim = createAnimation(frames, 10);
 
     mario.draw = function drawMario(context) {
       sprite.draw(routeFrame(this, runAnim), context, 0,0, (mario.go.heading < 0));
