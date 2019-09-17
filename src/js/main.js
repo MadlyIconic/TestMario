@@ -24,10 +24,10 @@ export default class main {
       const camera = new Camera();
       window.camera = camera;
 
-      level.comp.layers.push(
-        createCollisionLayer(level),
-        createCameraLayer(camera)
-      );
+      // level.comp.layers.push(
+      //   createCollisionLayer(level),
+      //   createCameraLayer(camera)
+      // );
       level.entities.add(mario);
       let gravity = 1000;
       let context = this.context;

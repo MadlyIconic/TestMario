@@ -65,7 +65,7 @@ function createTiles(level, backgrounds) {
 }
 
 
-function loadSpriteSheet(name){
+export function loadSpriteSheet(name){
   return  loadJSON(`sprites/${name}.json`)
   .then(sheetSpec => Promise.all(
     [sheetSpec,loadImage(sheetSpec.imageURL)]))
@@ -76,12 +76,20 @@ function loadSpriteSheet(name){
         sheetSpec.tileW,
         sheetSpec.tileH);
 
-      sheetSpec.tiles.forEach(tileSpec =>{
-        sprites.defineTile(
+      if(sheetSpec.tiles){
+        sheetSpec.tiles.forEach(tileSpec =>{
+          sprites.defineTile(
           tileSpec.name, 
           tileSpec.index[0], 
           tileSpec.index[1]);
-      })
+        });
+      }
+
+      if(sheetSpec.frames){
+        sheetSpec.frames.forEach(frameSpec =>  {
+            sprites.define(frameSpec.name, ...frameSpec.rect);
+        })
+      }
       // sprites.defineTile("ground", 0, 0);
       // sprites.defineTile("sky", 3, 23);
       //console.log("6");

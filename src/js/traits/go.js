@@ -6,21 +6,18 @@ export default class Go extends Trait {
 
     this.dir = 0;
     this.speed = 4000;
+    this.distance = 0;
+    this.heading = 1;
   }
 
   update(entity, deltaTime) {
-    //console.log("go update: ", entity);
     entity.vel.x = this.speed * this.dir * deltaTime;
+
+    if(this.dir){
+      this.heading = this.dir;
+      this.distance += Math.abs(entity.vel.x) * deltaTime;
+    }else{
+      this.distance = 0;
+    }
   }
-
-//   start(entity) {
-//     this.engagedTime = this.duration;
-//     //console.log("jump start", entity);
-//     //console.log(entity.hasOwnProperty("draw"));
-//   }
-
-//   cancel() {
-//     //console.log("jump cancel");
-//     this.engagedTime = 0;
-//   }
 }
