@@ -27,6 +27,7 @@ export function loadLevel(name) {
     level.comp.layers.push(backgroundLayer);
     const spriteLayer = createSpriteLayer(level.entities);
     level.comp.layers.push(spriteLayer);
+    level.gravity = levelSpec.gravity;
     return level;
   });
 }

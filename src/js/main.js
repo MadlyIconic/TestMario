@@ -25,7 +25,7 @@ export default class main {
       window.camera = camera;
 
       level.entities.add(mario);
-      let gravity = 1000;
+      let gravity = level.gravity;
       let context = this.context;
 
       const input = setUpKeyboard(mario);

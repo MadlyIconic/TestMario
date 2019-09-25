@@ -1,5 +1,6 @@
 {
   "spriteSheet": "overworld",
+  "gravity":750,
   "backgrounds": [
     {
       "tile": "sky",

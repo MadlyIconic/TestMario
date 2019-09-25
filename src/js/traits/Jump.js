@@ -6,11 +6,12 @@ export default class Jump extends Trait {
     super("jump");
 
     this.ready = 0;
-    this.duration = 0.5;
+    this.duration = 0.4;
     this.velocity = 200;
     this.engagedTime = 0;
     this.requestTime = 0;
     this.gracePeriod = 0.3;
+    this.speedBoost = 0.3;
   }
 
   get falling(){
@@ -27,7 +28,7 @@ export default class Jump extends Trait {
     }
     //console.log("Can jump?: ", this.ready);
     if (this.engagedTime > 0) {
-      entity.vel.y = -this.velocity;
+      entity.vel.y = -(this.velocity + Math.abs(entity.vel.x) * this.speedBoost);
       this.engagedTime -= deltaTime;
     }
 

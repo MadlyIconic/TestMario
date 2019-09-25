@@ -4,6 +4,7 @@ import TileCollider from "./tileCollider.js";
 
 export default class Level {
   constructor() {
+    this.gravity = 0;
     this.comp = new Compositor();
     this.entities = new Set();
     this.tiles = new Matrix();
