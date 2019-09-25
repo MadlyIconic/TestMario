@@ -9,6 +9,8 @@ export default class Jump extends Trait {
     this.duration = 0.5;
     this.velocity = 200;
     this.engagedTime = 0;
+    this.requestTime = 0;
+    this.gracePeriod = 0.3;
   }
 
   get falling(){
@@ -16,19 +18,30 @@ export default class Jump extends Trait {
   }
 
   update(entity, deltaTime) {
+    if(this.requestTime > 0){
+      if(this.ready > 0){
+        this.engagedTime = this.duration;
+        this.requestTime = 0;
+      }
+      this.requestTime -= deltaTime;
+    }
     //console.log("Can jump?: ", this.ready);
     if (this.engagedTime > 0) {
       entity.vel.y = -this.velocity;
       this.engagedTime -= deltaTime;
     }
 
+
     this.ready--;
   }
 
   start(entity) {
-    if(this.ready > 0){
-      this.engagedTime = this.duration;
-    }
+    this.requestTime = this.gracePeriod;
+    // if(this.ready > 0){
+    //   this.engagedTime = this.duration;
+    // }
+
+
     //console.log("jump start", entity);
     //console.log(entity.hasOwnProperty("draw"));
   }
@@ -36,6 +49,7 @@ export default class Jump extends Trait {
   cancel() {
     //console.log("jump cancel");
     this.engagedTime = 0;
+    this.requestTime = 0;
   }
 
   obstruct(entity, side){
