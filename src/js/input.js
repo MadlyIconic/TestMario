@@ -3,20 +3,24 @@ import Keyboard from "./keyboardstate.js";
 export function setUpKeyboard(entity){
     
       const input = new Keyboard();
-      input.addMapping('Space', keyState => {
+
+      var jumpAction = function(keyState){
         if (keyState) {
             entity.jump.start(entity);
         } else {
             entity.jump.cancel();
         }
+      }
+
+      input.addMapping('Space', keyState => jumpAction(keyState));
+      input.addMapping('KeyW', keyState => jumpAction(keyState));
+
+      input.addMapping('KeyD', keyState => {
+        entity.go.dir += keyState ?  1  : -1 ;
       });
 
-      input.addMapping('ArrowRight', keyState => {
-        entity.go.dir = keyState;
-      });
-
-      input.addMapping('ArrowLeft', keyState => {
-        entity.go.dir = -keyState;
+      input.addMapping('KeyA', keyState => {
+        entity.go.dir += -keyState  ? -1 : 1;
       });
 
       return input;

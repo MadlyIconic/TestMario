@@ -97,12 +97,7 @@ export function loadSpriteSheet(name){
             const animation = createAnimation(animSpec.frames, animSpec.frameLength)
             sprites.defineAmin(animSpec.name, animation);
         })
-
-        console.log('sprites', sprites);
       }
-      // sprites.defineTile("ground", 0, 0);
-      // sprites.defineTile("sky", 3, 23);
-      //console.log("6");
       return sprites;
     
   });

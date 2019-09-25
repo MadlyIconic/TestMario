@@ -24,10 +24,6 @@ export default class main {
       const camera = new Camera();
       window.camera = camera;
 
-      // level.comp.layers.push(
-      //   createCollisionLayer(level),
-      //   createCameraLayer(camera)
-      // );
       level.entities.add(mario);
       let gravity = 1000;
       let context = this.context;
@@ -41,6 +37,9 @@ export default class main {
       const timer = new Timer(1 / 60);
       timer.update = function update(deltaTime) {  
         level.update(deltaTime);
+        if(mario.pos.x  > 200){
+          camera.pos.x = mario.pos.x - 200;
+        }
         level.comp.draw(context, camera);
         mario.vel.y += gravity * deltaTime;
       };
