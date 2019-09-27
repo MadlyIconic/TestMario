@@ -11,9 +11,6 @@ export function createBackgroundLayer(level, sprites) {
   const resolver = level.tileCollider.tiles;
 
   function redraw(drawFrom, drawTo){
-    // if(drawFrom == startIndex && drawTo == endIndex){
-    //   return;
-    // }
     startIndex = drawFrom;
     endIndex = drawTo;
 

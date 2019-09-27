@@ -12,14 +12,13 @@ export default class main {
   constructor(context, canvas) {
     this.canvas = canvas;
     this.context = context;
-    this.pos = new vector(64, 180);
-    this.velocity = new vector(170, -500);
+    this.marioStartPos = new vector(42, 190);
   }
 
   loadAll() {
     Promise.all([
       loadLevel("1-1"),
-      createMario(this.pos.x, this.pos.y, this.velocity.x, this.velocity.y)
+      createMario(this.marioStartPos.x, this.marioStartPos.y)
     ]).then(([level, mario]) => {
       const camera = new Camera();
       window.camera = camera;
