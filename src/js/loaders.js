@@ -39,7 +39,6 @@ export function loadKeyboard(keyboardName, mario){
   
   .then((keyboardMappingSpec) => {
     var obj = setUpKeyboard(mario, keyboardMappingSpec);
-    console.log('obj1', obj);
     return obj;
   }).catch(e => {
     console.log(e);

@@ -3,8 +3,6 @@ import vector from "./vector.js";
 import { createMario } from "./helpers.js";
 import Timer from "./timer.js";
 
-import {createCollisionLayer,  createCameraLayer} from "./layers.js"
-import { setUpKeyboard } from "./input.js";
 import Camera from "./camera.js";
 import { setUpMouseControl } from "./debug.js";
 
@@ -29,9 +27,7 @@ export default class main {
 
       let input = null;
       loadKeyboard("myKeyboard", mario).then(obj => {
-        console.log('here', obj);
         input = obj;
-        console.log("input:", input);
         input.listenTo(window);
       });
       
