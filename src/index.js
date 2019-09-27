@@ -31,7 +31,6 @@ $().ready(function() {
   
   draw(context, window.innerHeight, window.innerWidth);
   main = new Main(context, $("#screen").get(0));
-  console.log("im ready!");
   //main.loadAll();
 });
 
