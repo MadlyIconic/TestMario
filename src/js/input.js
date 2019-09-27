@@ -1,5 +1,5 @@
 import Keyboard from "./keyboardstate.js";
-import { loadKeyboard } from "./loaders.js";
+//import { loadKeyboard } from "./loaders/keyboard.js";
 
 export function setUpKeyboard(mario, keyboardMappingSpec){
     

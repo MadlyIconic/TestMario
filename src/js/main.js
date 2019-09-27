@@ -1,10 +1,10 @@
-import { loadLevel, loadKeyboard } from "./loaders.js";
+import { loadKeyboard } from "./loaders/keyboard.js";
 import vector from "./vector.js";
 import { createMario } from "./helpers.js";
 import Timer from "./timer.js";
-
 import Camera from "./camera.js";
 import { setUpMouseControl } from "./debug.js";
+import { loadLevel } from "./loaders/level.js";
 
 export default class main {
   constructor(context, canvas) {
