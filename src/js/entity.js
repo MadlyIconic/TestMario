@@ -31,4 +31,8 @@ export default class Entity {
       trait.obstruct(this, side);
     });
   }
+
+  turbo(){
+    
+  }
 }

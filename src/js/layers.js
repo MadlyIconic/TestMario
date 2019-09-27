@@ -21,6 +21,9 @@ export function createBackgroundLayer(level, sprites) {
           if(sprites.animations.has(tile.name)){
             sprites.drawAnim(tile.name, bgContext, x - startIndex, y, level.totalTime);
           }else{
+            if(tile.name == "pipe-vert-right"){
+              console.log('tile name', tile.name);
+            }
             sprites.drawTile(tile.name, bgContext, x - startIndex, y);
           }
         });
