@@ -23,7 +23,7 @@ export function loadLevel(name) {
     ]))
     .then(([levelSpec, backgroundSprites]) => {
     const level = new Level();
-    createTiles(level, levelSpec.backgrounds, levelSpec.patterns);
+    createTiles(level, levelSpec.tiles, levelSpec.patterns);
     const backgroundLayer = createBackgroundLayer(level, backgroundSprites);
     level.comp.layers.push(backgroundLayer);
     const spriteLayer = createSpriteLayer(level.entities);
@@ -49,38 +49,38 @@ function loadJSON(levelname){
   return fetch(levelname).then(r => r.json())
 }
 
-function createTiles(level, backgrounds, patterns, offsetX = 0,  offsetY = 0) {
-  function applyRange(background, xstart, xlength, ystart, ylength){
+function createTiles(level, tiles, patterns, offsetX = 0,  offsetY = 0) {
+  function applyRange(tile, xstart, xlength, ystart, ylength){
     const xend = xstart + xlength;
     const yend = ystart + ylength;
     for (let x = xstart; x < xend; ++x) {
       for (let y = ystart; y < yend; ++y) {
         let derivedX = x  + offsetX;
         let derivedY = y  + offsetY;
-        if(background.pattern){
-          console.log('the pattern detected', patterns[background.pattern].backgrounds);
-          createTiles(level, patterns[background.pattern].backgrounds, patterns, derivedX, derivedY);
+        if(tile.pattern){
+          console.log('the pattern detected', patterns[tile.pattern].tiles);
+          createTiles(level, patterns[tile.pattern].tiles, patterns, derivedX, derivedY);
         }else{
           level.tiles.set(derivedX, derivedY, {
-            name: background.tile,
-            type: background.type
+            name: tile.name,
+            type: tile.type
           });
         }
       }
     }
   }
 
-  backgrounds.forEach(background => {
-    background.ranges.forEach(range => {
+  tiles.forEach(tile => {
+    tile.ranges.forEach(range => {
       if(range.length ==4){
         const [xstart, xlength, ystart, ylength] = range;
-        applyRange(background, xstart, xlength, ystart, ylength);
+        applyRange(tile, xstart, xlength, ystart, ylength);
       }else if(range.length ==  3){
         const [xstart, xlen, ystart] = range;
-        applyRange(background, xstart, xlen, ystart, 1);
+        applyRange(tile, xstart, xlen, ystart, 1);
       }else if(range.length == 2){
         const [xstart, ystart] = range;
-        applyRange(background, xstart, 1, ystart, 1);
+        applyRange(tile, xstart, 1, ystart, 1);
       }
     });
   });
