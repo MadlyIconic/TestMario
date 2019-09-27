@@ -2,6 +2,7 @@ import Level from "./level.js";
 import { createBackgroundLayer, createSpriteLayer } from "./layers.js";
 import SpriteSheet from "./spritesheet.js";
 import { createAnimation } from "./anim.js";
+import { setUpKeyboard } from "./input.js";
 
 export function loadImage(url) {
   return new Promise(resolve => {
@@ -29,6 +30,19 @@ export function loadLevel(name) {
     level.comp.layers.push(spriteLayer);
     level.gravity = levelSpec.gravity;
     return level;
+  });
+}
+
+export function loadKeyboard(keyboardName, mario){
+  let keyboardMappingname = `keyboards/${keyboardName}.json`;
+  return loadJSON (keyboardMappingname)
+  
+  .then((keyboardMappingSpec) => {
+    var obj = setUpKeyboard(mario, keyboardMappingSpec);
+    console.log('obj1', obj);
+    return obj;
+  }).catch(e => {
+    console.log(e);
   });
 }
 

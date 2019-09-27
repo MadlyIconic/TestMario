@@ -1,4 +1,4 @@
-import { loadLevel } from "./loaders.js";
+import { loadLevel, loadKeyboard } from "./loaders.js";
 import vector from "./vector.js";
 import { createMario } from "./helpers.js";
 import Timer from "./timer.js";
@@ -28,10 +28,14 @@ export default class main {
       let gravity = level.gravity;
       let context = this.context;
 
-      const input = setUpKeyboard(mario);
-
-      input.listenTo(window);
-
+      let input = null;
+      loadKeyboard("myKeyboard", mario).then(obj => {
+        console.log('here', obj);
+        input = obj;
+        console.log("input:", input);
+        input.listenTo(window);
+      });
+      
       setUpMouseControl(this.canvas, mario, camera);
       
       const timer = new Timer(1 / 60);
