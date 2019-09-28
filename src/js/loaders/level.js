@@ -2,6 +2,7 @@ import Level from "../level.js";
 import { createBackgroundLayer, createSpriteLayer } from "../layers.js";
 import { loadSpriteSheet } from "../loaders.js";
 import { loadJSON } from "./json.js";
+import { Matrix } from "../matrix.js";
 
 export function loadLevel(name) {
     let levelname = `levels/${name}.json`;
@@ -12,21 +13,49 @@ export function loadLevel(name) {
       ]))
       .then(([levelSpec, backgroundSprites]) => {
       const level = new Level();
+      const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) =>{
+          return mergedTiles.concat(layerSpec.tiles);
+      }, [])
+      const collisionGrid =  createCollisionGrid(mergedTiles, levelSpec.patterns);
+      level.setCollisionGrid(collisionGrid);
+      
 
-      for(const {tile, x, y} of expandTiles(levelSpec.tiles, levelSpec.patterns)){
-            level.tiles.set(x, y, {
-                         name: tile.name,
-                         type: tile.type
-            });
-       }
+      levelSpec.layers.forEach(layer => {
+        const backgroundGrid =  createBackgroundGrid(layer.tiles, levelSpec.patterns);        
+        const backgroundLayer = createBackgroundLayer(level,backgroundGrid, backgroundSprites);
+        level.comp.layers.push(backgroundLayer);
+      })
 
-      const backgroundLayer = createBackgroundLayer(level, backgroundSprites);
-      level.comp.layers.push(backgroundLayer);
+      
+      
+
+      
+      
       const spriteLayer = createSpriteLayer(level.entities);
       level.comp.layers.push(spriteLayer);
       level.gravity = levelSpec.gravity;
       return level;
     });
+  }
+
+  function createCollisionGrid(tiles, patterns){
+    const grid = new Matrix();
+
+    for(const {tile, x, y} of expandTiles(tiles, patterns)){
+      grid.set(x, y, {type: tile.type});
+    }
+
+    return grid;
+  }
+
+  function createBackgroundGrid(tiles, patterns){
+    const grid = new Matrix();
+
+    for(const {tile, x, y} of expandTiles(tiles, patterns)){
+      grid.set(x, y, {name: tile.name});
+    }
+
+    return grid;
   }
 
   function* expandSpan(xstart, xlength, ystart, ylength){

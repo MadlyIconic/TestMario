@@ -1,5 +1,4 @@
 import Compositor from "./compositor.js";
-import { Matrix } from "./matrix.js";
 import TileCollider from "./tileCollider.js";
 
 export default class Level {
@@ -7,9 +6,13 @@ export default class Level {
     this.gravity = 0;
     this.comp = new Compositor();
     this.entities = new Set();
-    this.tiles = new Matrix();
+    //this.tiles = new Matrix();
     this.totalTime = 0;
-    this.tileCollider = new TileCollider(this.tiles);
+    this.tileCollider = null;
+  }
+
+  setCollisionGrid(matrix){
+    this.tileCollider = new TileCollider(matrix);
   }
 
   update(deltaTime) {
