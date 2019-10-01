@@ -1,6 +1,6 @@
 import { loadKeyboard } from "./loaders/keyboard.js";
 import vector from "./vector.js";
-import { createMario } from "./helpers.js";
+import { loadMario } from "./entities/mario.js";
 import Timer from "./timer.js";
 import Camera from "./camera.js";
 import { setUpMouseControl } from "./debug.js";
@@ -16,12 +16,34 @@ export default class main {
   loadAll() {
     Promise.all([
       loadLevel("1-1"),
-      createMario()
-    ]).then(([level, mario]) => {
+      loadMario()
+    ]).then(([level, createMario]) => {
       const camera = new Camera();
       window.camera = camera;
       this.marioStartPos = level.startpoint;
+      const mario = createMario();
       mario.pos.set(this.marioStartPos.x, this.marioStartPos.y);
+
+      mario.addTrait({
+        NAME: "hacktrait",
+        spawnTimeout: 0,
+        obstruct(){
+          //console.log('hacktrait obstruct');
+        },
+        update(mario, deltaTime){
+          //console.log('spawn:', this.spawnTimeout);
+          if(this.spawnTimeout > 0.1 && mario.vel.y < 0){
+            const spawn = createMario();
+            spawn.pos.set(mario.pos.x, mario.pos.y);
+            spawn.vel.y = mario.vel.y + 200;
+            spawn.vel.y += gravity * deltaTime;
+            level.entities.add(spawn);
+            this.spawnTimeout = 0;
+          }
+          this.spawnTimeout += deltaTime;
+        }
+      })
+
       level.entities.add(mario);
       let gravity = level.gravity;
       let context = this.context;

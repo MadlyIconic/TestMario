@@ -1,15 +1,21 @@
-import { createMario } from "./helpers.js";
+export default class Anim{
+constructor(frameLength){
+this.frameLength = frameLength
+}
 
-export function createAnimation(frames, frameLength){
-    return function resolveFrame(distance){
-      const frameIndex  = (Math.floor(distance / frameLength) % frames.length);
+createAnimation(frames, func){
+  if(!func){
+    var func = function resolveFrame(distance){
+      const frameIndex  = (Math.floor(distance / this.frameLength) % frames.length);
           const frameName = frames[frameIndex];
           
           return frameName;
     }
   }
+    return func;
+  }
 
-  export function routeFrame(entity, func){
+routeFrame(entity, func){
     if(entity.jump.falling){
        //console.log("ready: ", entity.jump.ready);
        return "jump";
@@ -23,3 +29,4 @@ export function createAnimation(frames, frameLength){
     }
     return 'idle';
   }
+}

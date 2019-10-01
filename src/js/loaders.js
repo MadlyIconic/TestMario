@@ -1,6 +1,6 @@
 
 import SpriteSheet from "./spritesheet.js";
-import { createAnimation } from "./anim.js";
+import Anim from "./anim.js";
 
 import { loadJSON } from "./loaders/json.js";
 
@@ -45,8 +45,12 @@ export function loadSpriteSheet(name){
 
       if(sheetSpec.animations){
         sheetSpec.animations.forEach(animSpec =>  {
-            const animation = createAnimation(animSpec.frames, animSpec.frameLength)
-            sprites.defineAmin(animSpec.name, animation);
+            const func = null;
+            // func = sheetSpec.animations.get(animSpec.name);
+            const animationCreator = new Anim();
+            const animation = animationCreator.createAnimation(animSpec.frames, animSpec.frameLength, func)
+            sprites.defineAmin(animSpec.name, animation, func);
+          
         })
       }
       return sprites;

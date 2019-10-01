@@ -8,11 +8,13 @@ export default class SpriteSheet {
   }
 
   defineAmin(name, animation){
+    console.log('anim define:', name, animation, this.tiles)
     this.animations.set(name, animation);
   }
 
   define(name, x, y, width, height) {
     const buffers = [false, true].map(flip => {
+      console.log("define:", flip, name);
       const buffer = document.createElement("canvas");
       buffer.width = width;
       buffer.height = height;
@@ -34,12 +36,14 @@ export default class SpriteSheet {
   }
 
   draw(name, context, x, y, flip = false) {
+    //console.log('this tiles:', this.tiles);
     const buffer = this.tiles.get(name)[flip?1:0];
     context.drawImage(buffer, x, y);
   }
 
   drawAnim(name, context, x, y, distance){
     const animation = this.animations.get(name, 10);
+    //console.log('animation', name, this.animations);
     this.drawTile(animation(distance),context,  x, y);
   }
 
