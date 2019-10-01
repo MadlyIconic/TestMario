@@ -1,5 +1,6 @@
 {
     "startpoint" : {"x":102, "y":1},
+    "showCollisionLayer": 0,
     "spriteSheet": "overworld",
     "gravity": 750,
     "layers": [

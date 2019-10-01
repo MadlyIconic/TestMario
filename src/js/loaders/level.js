@@ -1,5 +1,5 @@
 import Level from "../level.js";
-import { createBackgroundLayer, createSpriteLayer } from "../layers.js";
+import { createBackgroundLayer, createSpriteLayer, createCollisionLayer } from "../layers.js";
 import { loadSpriteSheet } from "../loaders.js";
 import { loadJSON } from "./json.js";
 import { Matrix } from "../matrix.js";
@@ -22,8 +22,14 @@ export function loadLevel(name) {
 
       levelSpec.layers.forEach(layer => {
         const backgroundGrid =  createBackgroundGrid(layer.tiles, levelSpec.patterns);        
+        
         const backgroundLayer = createBackgroundLayer(level,backgroundGrid, backgroundSprites);
         level.comp.layers.push(backgroundLayer);
+        if(levelSpec.showCollisionLayer === 1){
+          const fakeLayer = createCollisionLayer(level);
+          level.comp.layers.push(fakeLayer);
+        }
+        
       })
 
       const spriteLayer = createSpriteLayer(level.entities);
@@ -104,10 +110,6 @@ function expandTiles(tiles, patterns) {
                             y: derivedY
                         }
                     );
-                    // level.tiles.set(derivedX, derivedY, {
-                    //     name: tile.name,
-                    //     type: tile.type
-                    
                 }
             }
         }
