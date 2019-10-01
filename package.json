@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "serve"
+    "start": "npm run build -and serve dist",
+    "build": "babel src -d dist",
+    "buildpresets": "babel --presets es2015 src -d dist",
+    "cleannode": "node clean.js node_modules", 
+    "cleandist": "node clean.js dist",
+    "cleanall": "npm run cleandist -and npm run cleannode",
+    "reinstall": "npm run cleanall -and npm run install", 
+    "install": "npm install",
+    "rebuild": "npm run reinstall -and npm run build "
   },
   "dependencies": {
     "bootstrap": "4.3.1",
@@ -12,6 +20,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.2.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "serve": "^11.1.0"
   },
   "keywords": []
