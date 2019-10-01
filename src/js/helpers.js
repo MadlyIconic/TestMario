@@ -8,12 +8,12 @@ const SLOW_DRAG = 1/1000;
 const FAST_DRAG = 1/5000;
 
 
-export function createMario(x, y) {
+export function createMario() {
   return loadSpriteSheet('mario').then(sprite => {
     const frames = [];
     const mario = new Entity();
     mario.size.set(16, 16);
-    mario.pos.set(x, y);
+    
     mario.addTrait(new Go());
     mario.addTrait(new Jump());
     mario.go.dragFactor = SLOW_DRAG;

@@ -16,11 +16,12 @@ export default class main {
   loadAll() {
     Promise.all([
       loadLevel("1-1"),
-      createMario(this.marioStartPos.x, this.marioStartPos.y)
+      createMario()
     ]).then(([level, mario]) => {
       const camera = new Camera();
       window.camera = camera;
-
+      this.marioStartPos = level.startpoint;
+      mario.pos.set(this.marioStartPos.x, this.marioStartPos.y);
       level.entities.add(mario);
       let gravity = level.gravity;
       let context = this.context;
