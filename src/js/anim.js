@@ -4,12 +4,12 @@ this.frameLength = frameLength
 }
 
 createAnimation(frames, func){
+  let self = this;
   if(!func){
     var func = function resolveFrame(distance){
-      const frameIndex  = (Math.floor(distance / this.frameLength) % frames.length);
-          const frameName = frames[frameIndex];
-          
-          return frameName;
+      const frameIndex  = (Math.floor(distance / self.frameLength) % frames.length);
+      const frameName = frames[frameIndex];    
+      return frameName;
     }
   }
     return func;

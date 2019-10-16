@@ -48,9 +48,14 @@ export function loadSpriteSheet(name){
             const func = null;
             // func = sheetSpec.animations.get(animSpec.name);
             const animationCreator = new Anim();
-            const animation = animationCreator.createAnimation(animSpec.frames, animSpec.frameLength, func)
-            sprites.defineAmin(animSpec.name, animation, func);
-          
+            let framelen = 0;
+            if(animSpec.frameLength){
+              framelen = animSpec.frameLength;
+            }else{
+              framelen = animSpec.framelen;
+            }
+            const animation = animationCreator.createAnimation(animSpec.frames, framelen, func)
+            sprites.defineAnim(animSpec.name, animation, func);          
         })
       }
       return sprites;

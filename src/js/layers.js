@@ -1,6 +1,8 @@
 import TileResolver from "./tileResolver.js";
+import Anim from "./anim.js";
 
 export function createBackgroundLayer(level, tiles, sprites) {
+  console.log("background layer create with sprites:", sprites)
   const buffer = document.createElement("canvas");
   buffer.width = 528 + 16;
   buffer.height = 768;
@@ -16,6 +18,9 @@ export function createBackgroundLayer(level, tiles, sprites) {
       if(col){
         col.forEach((tile, y) => {
           if(sprites.animations.has(tile.name)){
+            //console.log("want to load animation for tile", tile)
+            //const animationCreator = new Anim();
+            //const animation = animationCreator.createAnimation(animSpec.frames, animSpec.frameLength, func)
             sprites.drawAnim(tile.name, bgContext, x - startIndex, y, level.totalTime);
           }else{
             if(tile.name == "pipe-vert-right"){

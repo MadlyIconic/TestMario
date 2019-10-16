@@ -7,7 +7,7 @@ export default class SpriteSheet {
     this.animations = new Map();
   }
 
-  defineAmin(name, animation){
+  defineAnim(name, animation){
     console.log('anim define:', name, animation, this.tiles)
     this.animations.set(name, animation);
   }
@@ -43,7 +43,7 @@ export default class SpriteSheet {
 
   drawAnim(name, context, x, y, distance){
     const animation = this.animations.get(name, 10);
-    //console.log('animation', name, this.animations);
+    console.log('animation', name, animation);
     this.drawTile(animation(distance),context,  x, y);
   }
 
