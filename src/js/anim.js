@@ -1,12 +1,13 @@
 export default class Anim{
-constructor(frameLength){
+constructor(frameLength, framelen){
 this.frameLength = frameLength
-}
+this.framelen = frameLength
 
-createAnimation(frames, func){
+this.createAnimation = function(frames, func){
+  let self = this;
   if(!func){
     var func = function resolveFrame(distance){
-      const frameIndex  = (Math.floor(distance / this.frameLength) % frames.length);
+      const frameIndex  = (Math.floor(distance / self.framelen) % frames.length);
           const frameName = frames[frameIndex];
           
           return frameName;
@@ -15,7 +16,7 @@ createAnimation(frames, func){
     return func;
   }
 
-routeFrame(entity, func){
+this.routeFrame = function(entity, func){
     if(entity.jump.falling){
        //console.log("ready: ", entity.jump.ready);
        return "jump";
@@ -29,4 +30,5 @@ routeFrame(entity, func){
     }
     return 'idle';
   }
+}
 }

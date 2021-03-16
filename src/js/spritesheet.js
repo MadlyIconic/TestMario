@@ -44,7 +44,8 @@ export default class SpriteSheet {
   drawAnim(name, context, x, y, distance){
     const animation = this.animations.get(name, 10);
     //console.log('animation', name, this.animations);
-    this.drawTile(animation(distance),context,  x, y);
+    let createdAnimation = animation(distance);
+    this.drawTile(createdAnimation,context,  x, y);
   }
 
   drawTile(name, context, x, y) {
