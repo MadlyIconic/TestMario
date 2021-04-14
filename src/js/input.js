@@ -22,7 +22,8 @@ var jumpAction = function(keyState, entity){
 }
 
 function setUpRun(input, entity, KeyName){
-  input.addMapping(KeyName, keyState => entity.turbo(keyState));
+  input.addMapping(KeyName, keyState => 
+    entity.turbo(keyState));
 }
 
 function setUpJump(input, entity, KeyName){
