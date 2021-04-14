@@ -43,12 +43,15 @@ export default class Jump extends Trait {
     }
 
 
-    console.log("jump start", entity);
-    console.log(entity.hasOwnProperty("draw"));
+    //console.log("jump start", entity);
+    if(entity.hasOwnProperty("draw")){
+      //console.log('has draw property');
+    }
+    
   }
 
   cancel() {
-    console.log("jump cancel");
+    //console.log("jump cancel");
     this.engagedTime = 0;
     this.requestTime = 0;
   }
@@ -59,8 +62,8 @@ export default class Jump extends Trait {
     }else if(side = Sides.TOP){
       this.cancel();
     }
-    if(!side){
-      console.log('Jump obstruct:', side);
+    if(side){
+      //console.log('Jump obstruct:', side);
     }
     
   }

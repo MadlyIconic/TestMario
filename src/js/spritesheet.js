@@ -14,7 +14,7 @@ export default class SpriteSheet {
 
   define(name, x, y, width, height) {
     const buffers = [false, true].map(flip => {
-      console.log("define:", flip, name);
+      //console.log("define:",name , flip);
       const buffer = document.createElement("canvas");
       buffer.width = width;
       buffer.height = height;
