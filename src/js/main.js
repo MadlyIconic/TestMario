@@ -28,16 +28,11 @@ export default class main {
         NAME: "hacktrait",
         spawnTimeout: 0,
         obstruct(){
-          //console.log('hacktrait obstruct');
+           //console.log('hacktrait obstruct');
         },
         update(mario, deltaTime){
           //console.log('spawn:', this.spawnTimeout);
           if(this.spawnTimeout > 0.1 && mario.vel.y < 0){
-            const spawn = createMario();
-            spawn.pos.set(mario.pos.x, mario.pos.y);
-            spawn.vel.y = mario.vel.y + 200;
-            spawn.vel.y += gravity * deltaTime;
-            level.entities.add(spawn);
             this.spawnTimeout = 0;
           }
           this.spawnTimeout += deltaTime;
