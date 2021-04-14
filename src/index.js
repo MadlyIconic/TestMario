@@ -6,11 +6,11 @@ function reportWindowSize() {
   draw(getContext("2d"), window.innerHeight, window.innerWidth)
 }
 
-let getContext = function(name){
+let getContext = function(contextName){
   const canvases = $("#screen");
   const context = $(canvases)
     .get(0)
-    .getContext(name);
+    .getContext(contextName);
 
     return context;
 }
