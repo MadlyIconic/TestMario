@@ -23,7 +23,7 @@ this.routeFrame = function(entity, func){
     }
     if(entity.go.dir > 0  || entity.go.dir < 0){
       if((entity.vel.x > 0 && entity.go.dir < 0 )|| (entity.vel.x < 0 && entity.go.dir > 0)) {
-          console.log('break');
+          console.log('Its a break');
           return "break";
       }
       return func(entity.go.distance);
