@@ -1,20 +1,20 @@
 export function setUpMouseControl(canvas, entity, camera){
     let lastEvent;
         ['mmousedown', 'mousemove'].forEach(eventName => {
-            // canvas.addEventListener(eventName, event => {
-            //   if(event.buttons === 1){
-            //     entity.vel.set(0,0);
-            //     entity.pos.set(event.offsetX + camera.pos.x
-            //                  ,event.offsetY + camera.pos.y);
-            //   }else if(event.buttons === 2  
-            //         && lastEvent 
-            //         && lastEvent.buttons == 2 
-            //         && lastEvent.type == 'mousemove'){
-            //       camera.pos.x -= event.offsetX - lastEvent.offsetX;
-            //   }
+            canvas.addEventListener(eventName, event => {
+              if(event.buttons === 1){
+                entity.vel.set(0,0);
+                entity.pos.set(event.offsetX + camera.pos.x
+                             ,event.offsetY + camera.pos.y);
+              }else if(event.buttons === 2  
+                    && lastEvent 
+                    && lastEvent.buttons == 2 
+                    && lastEvent.type == 'mousemove'){
+                  camera.pos.x -= event.offsetX - lastEvent.offsetX;
+              }
 
-            //   lastEvent = event;
-            // })
+              lastEvent = event;
+            })
           })
 
           canvas.addEventListener('contextmenu',  event => { 
@@ -22,6 +22,6 @@ export function setUpMouseControl(canvas, entity, camera){
           });
 
           canvas.addEventListener('mousemove',  event => { 
-            //console.log('moving', event.offsetX, event.offsetY);
+            //console.log('Location:', event.offsetX, event.offsetY);
         })
     }

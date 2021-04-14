@@ -1,5 +1,5 @@
 {
-    "startpoint" : {"x":102, "y":1},
+    "startpoint" : {"x":80, "y":0},
     "showCollisionLayer": 0,
     "spriteSheet": "overworld",
     "gravity": 750,
@@ -87,9 +87,9 @@
                     "type": "ground",
                     "ranges": [
                         [
-                            27,
+                            28,
                             5,
-                            9
+                            19
                         ],
                         [
                             83,
@@ -414,12 +414,16 @@
                     "pattern": "cloud-single",
                     "ranges": [
                         [
-                            3,
-                            5
+                            5,
+                            6
                         ],
                         [
-                            23,
-                            9
+                            8,
+                            6
+                        ],
+                        [
+                            11,
+                            6
                         ]
                     ]
                 }

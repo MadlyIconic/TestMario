@@ -22,7 +22,9 @@ export default class main {
       window.camera = camera;
       this.marioStartPos = level.startpoint;
       const mario = createMario();
-      mario.pos.set(this.marioStartPos.x, this.marioStartPos.y);
+      let marioX = this.marioStartPos.x;
+      let marioY = this.marioStartPos.y;
+      mario.pos.set(marioX, marioY);
 
       mario.addTrait({
         NAME: "hacktrait",

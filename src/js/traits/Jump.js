@@ -26,7 +26,10 @@ export default class Jump extends Trait {
       }
       this.requestTime -= deltaTime;
     }
-    //console.log("Can jump?: ", this.ready);
+    if(this.ready !== 1){
+      //console.log("Can jump?: ", this.ready);
+    }
+    
     if (this.engagedTime > 0) {
       entity.vel.y = -(this.velocity + Math.abs(entity.vel.x) * this.speedBoost);
       this.engagedTime -= deltaTime;
@@ -51,7 +54,7 @@ export default class Jump extends Trait {
   }
 
   cancel() {
-    //console.log("jump cancel");
+    console.log("jump cancel");
     this.engagedTime = 0;
     this.requestTime = 0;
   }
@@ -63,7 +66,7 @@ export default class Jump extends Trait {
       this.cancel();
     }
     if(side){
-      //console.log('Jump obstruct:', side);
+      console.log('Jump obstruct:',entity,  side);
     }
     
   }
