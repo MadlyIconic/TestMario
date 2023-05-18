@@ -1,8 +1,8 @@
-import Level from "../level.js";
+import { Matrix } from "../matrix.js";
+import { Level } from "../level.js";
 import { createBackgroundLayer, createSpriteLayer, createCollisionLayer } from "../layers.js";
 import { loadSpriteSheet } from "../loaders.js";
 import { loadJSON } from "./json.js";
-import { Matrix } from "../matrix.js";
 
 export function loadLevel(name) {
     let levelname = `levels/${name}.json`;
@@ -44,19 +44,14 @@ export function loadLevel(name) {
     const grid = new Matrix();
 
     for(const {tile, x, y} of expandTiles(tiles, patterns)){
-      grid.set(x, y, {type: tile.type});
+      grid.set(x, y, {name: tile.name, type: tile.type});
     }
 
     return grid;
   }
 
   function createBackgroundGrid(tiles, patterns){
-    const grid = new Matrix();
-
-    for(const {tile, x, y} of expandTiles(tiles, patterns)){
-      grid.set(x, y, {name: tile.name});
-    }
-
+    const grid = createCollisionGrid(tiles, patterns);
     return grid;
   }
 

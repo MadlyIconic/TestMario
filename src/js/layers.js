@@ -6,7 +6,6 @@ export function createBackgroundLayer(level, tiles, sprites) {
   buffer.height = 768;
   const bgContext = buffer.getContext("2d");
   
-  //const tiles = level.tiles;
   const resolver = new TileResolver(tiles);
 
   function redraw(startIndex, endIndex){
@@ -18,9 +17,6 @@ export function createBackgroundLayer(level, tiles, sprites) {
           if(sprites.animations.has(tile.name)){
             sprites.drawAnim(tile.name, bgContext, x - startIndex, y, level.totalTime);
           }else{
-            if(tile.name == "pipe-vert-right"){
-              //console.log('tile name', tile.name);
-            }
             sprites.drawTile(tile.name, bgContext, x - startIndex, y);
           }
         });

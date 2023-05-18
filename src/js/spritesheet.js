@@ -8,8 +8,12 @@ export default class SpriteSheet {
   }
 
   defineAmin(name, animation){
-    console.log('anim define:', name, animation, this.tiles)
+    console.log('anim define:');
+    console.log('Name:',name);
+    console.log('Animaton:', animation);
+    console.log('Tiles: ', this.tiles);
     this.animations.set(name, animation);
+    console.log('------------------------------')
   }
 
   define(name, x, y, width, height) {

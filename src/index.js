@@ -16,8 +16,8 @@ let getContext = function(contextName){
 }
 
 function draw(ctx, height, width) {
-  ctx.canvas.height  = height * 0.6;
-  ctx.canvas.width = width * 0.8;
+  ctx.canvas.height  = height * 0.7;
+  ctx.canvas.width = width * 0.7;
   //...drawing code...
 }
 

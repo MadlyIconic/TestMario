@@ -1,7 +1,7 @@
 import Compositor from "./compositor.js";
 import TileCollider from "./tileCollider.js";
 
-export default class Level {
+export class Level {
   constructor() {
     this.gravity = 0;
     this.comp = new Compositor();

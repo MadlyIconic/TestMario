@@ -1,3 +1,4 @@
 export function loadJSON(levelname){
-    return fetch(levelname).then(r => r.json())
+    let level = fetch(levelname).then(r => r.json());
+    return level;
   }
