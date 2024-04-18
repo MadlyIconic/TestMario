@@ -2,7 +2,7 @@
   "name": "super-mario",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "src/index.html",
   "scripts": {
     "start": "npm run build -and serve dist",
     "build": "babel src -d dist",
