@@ -6,6 +6,7 @@ import { loadJSON } from "./json.js";
 
 export function loadLevel(name) {
     let levelname = `levels/${name}.json`;
+    console.log("level name: ", levelname);
     return loadJSON (levelname)
       .then(levelSpec => Promise.all([
         levelSpec,

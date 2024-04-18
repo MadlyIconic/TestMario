@@ -14,6 +14,7 @@ export default class main {
   }
 
   loadAll() {
+    console.log("Loading 1-1");
     Promise.all([
       loadLevel("1-1"),
       loadMario()
